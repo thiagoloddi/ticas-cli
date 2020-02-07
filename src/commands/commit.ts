@@ -5,8 +5,6 @@ const commit = async (options: CommitOptions): Promise<void> => {
   let commitMessage = "";
   let messagePreffix = "";
 
-  console.log("asdasd");
-
   if (options.branch) {
     const reg = new RegExp(/^[*]\s/);
     const currentBranch = (await git.branch())
