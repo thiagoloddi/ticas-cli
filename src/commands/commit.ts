@@ -1,5 +1,8 @@
+import axios from "axios";
+
 import prompt from "../utils/prompt";
 import git from "../utils/git";
+import print from "../utils/print";
 
 const commit = async (options: CommitOptions): Promise<void> => {
   let commitMessage = "";
@@ -15,6 +18,24 @@ const commit = async (options: CommitOptions): Promise<void> => {
   }
 
   if (options.random) {
+    const choices = [
+      { name: "[accept]", value: 1 },
+      { name: "[get other]", value: 2 }
+    ];
+
+    let choice = 0;
+
+    while (choice !== 1) {
+      print.message("Generating random commit message...");
+      commitMessage = await axios
+        .get("http://whatthecommit.com/index.txt")
+        .then(res => res.data);
+
+      choice = await prompt.list(
+        `You commit message will be: ${messagePreffix} ${commitMessage}`,
+        choices
+      );
+    }
   } else {
     commitMessage = await prompt.input(
       "Enter commit message:",

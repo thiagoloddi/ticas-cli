@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 const list = async (
   message: string,
@@ -9,9 +10,9 @@ const list = async (
       type: "list",
       name: "value",
       prefix: "",
-      message,
       pageSize: 10,
-      choices
+      choices,
+      message: chalk.reset(message)
     })
     .then(({ value }) => value);
 };
@@ -23,7 +24,7 @@ const input = async (message: string, suffix: string = ""): Promise<string> => {
       name: "value",
       prefix: "",
       suffix,
-      message
+      message: chalk.reset(message)
     })
     .then(({ value }) => value);
 };
