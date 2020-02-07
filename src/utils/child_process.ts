@@ -17,7 +17,9 @@ export const execute = (
     });
 
     cp.stderr.on("data", data => {
-      print.message(data.toString());
+      if (!silent) {
+        print.message(data.toString());
+      }
     });
 
     cp.on("error", error => {
@@ -26,7 +28,9 @@ export const execute = (
     });
 
     cp.on("close", code => {
-      print.message(output);
+      if (!silent) {
+        print.message(output);
+      }
       resolve(output);
     });
   });
