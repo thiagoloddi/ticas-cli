@@ -28,4 +28,11 @@ const add = (path: string): Promise<string> => execute(`git add ${path}`);
 const commit = (message: string): Promise<string> =>
   execute(`git commit -m`, `${message}`);
 
-export default { branch, checkout, fetch, add, commit };
+const currentBranch = (): Promise<string> =>
+  execute(`git branch`).then(output => {
+    const reg = new RegExp(/^[*]\s/);
+    const current = output.split("\n").find(branch => reg.test(branch));
+    return current ? current.replace(reg, "") : "";
+  });
+
+export default { branch, checkout, fetch, add, commit, currentBranch };

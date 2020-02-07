@@ -16,12 +16,13 @@ const list = async (
     .then(({ value }) => value);
 };
 
-const input = async (message: string): Promise<string> => {
+const input = async (message: string, suffix: string = ""): Promise<string> => {
   return inquirer
     .prompt({
       type: "input",
       name: "value",
       prefix: "",
+      suffix,
       message
     })
     .then(({ value }) => value);
