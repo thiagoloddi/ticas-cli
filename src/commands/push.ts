@@ -1,7 +1,6 @@
 import parser from "../utils/parser";
 import git from "../utils/git";
 import prompt from "../utils/prompt";
-import { execute } from "../utils/child_process";
 import commit from "./commit";
 
 const push = async (): Promise<void> => {
@@ -16,10 +15,9 @@ const push = async (): Promise<void> => {
 
     if (answer) {
       await commit();
-      console.log("comitou");
     }
   }
-  // const output = await git.push(currentBranch);
+  await git.push(currentBranch);
 };
 
 export default push;
