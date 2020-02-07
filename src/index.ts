@@ -1,10 +1,12 @@
 import program from "commander";
+import "source-map-support/register";
+
+import print from "./utils/print";
 
 import checkout from "./commands/checkout";
 import commit from "./commands/commit";
-import print from "./utils/print";
-import "source-map-support/register";
 import push from "./commands/push";
+import pull from "./commands/pull";
 
 export const start = function(version: string): void {
   program
@@ -39,7 +41,14 @@ export const start = function(version: string): void {
   program
     .command("push")
     .alias("ps")
+    .description("push changes to current branch")
     .action(() => push());
+
+  program
+    .command("pull")
+    .alias("pl")
+    .description("select branch from list to pull from")
+    .action(() => pull());
 
   program.command("*", "", { noHelp: true }).action((_, args) => {
     if (args[0]) {

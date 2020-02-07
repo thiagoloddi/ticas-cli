@@ -1,7 +1,5 @@
 # Roadmap
 
-- `tc push`: push changes to remote branch
-
 - `tc pull`: select branch from list to pull from
 
 - `tc pull --current`: pull from current branch
