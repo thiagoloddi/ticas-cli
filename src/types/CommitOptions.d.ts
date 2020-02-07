@@ -1,5 +1,4 @@
 type CommitOptions = {
-  branch: boolean;
-  random: boolean;
-  randomForce: boolean;
+  branch?: boolean;
+  random?: boolean;
 };

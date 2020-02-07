@@ -34,9 +34,7 @@ export const start = function(version: string): void {
       "-R, --random-force",
       "adds a random commit message (no confirmation)"
     )
-    .action(({ branch, random, randomForce }) =>
-      commit({ branch, random, randomForce })
-    );
+    .action(({ branch, random }) => commit({ branch, random }));
 
   program
     .command("push")

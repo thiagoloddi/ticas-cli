@@ -4,7 +4,7 @@ import prompt from "../utils/prompt";
 import git from "../utils/git";
 import print from "../utils/print";
 
-const commit = async (options: CommitOptions): Promise<void> => {
+const commit = async (options: CommitOptions = {}): Promise<void> => {
   let commitMessage = "";
   let messagePreffix = "";
 

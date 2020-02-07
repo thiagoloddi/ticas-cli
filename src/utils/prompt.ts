@@ -1,11 +1,11 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
-const list = async (
+const list = (
   message: string,
   choices: inquirer.DistinctChoice<inquirer.ListChoiceMap>[]
-): Promise<number> => {
-  return inquirer
+): Promise<number> =>
+  inquirer
     .prompt({
       type: "list",
       name: "value",
@@ -15,10 +15,9 @@ const list = async (
       message: chalk.reset(message)
     })
     .then(({ value }) => value);
-};
 
-const input = async (message: string, suffix: string = ""): Promise<string> => {
-  return inquirer
+const input = (message: string, suffix: string = ""): Promise<string> =>
+  inquirer
     .prompt({
       type: "input",
       name: "value",
@@ -27,6 +26,16 @@ const input = async (message: string, suffix: string = ""): Promise<string> => {
       message: chalk.reset(message)
     })
     .then(({ value }) => value);
-};
 
-export default { list, input };
+const confirm = (message: string, defaultValue: boolean): Promise<string> =>
+  inquirer
+    .prompt({
+      type: "confirm",
+      name: "value",
+      prefix: "",
+      default: defaultValue,
+      message: chalk.reset(message)
+    })
+    .then(({ value }) => value);
+
+export default { list, input, confirm };
