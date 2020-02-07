@@ -16,17 +16,15 @@ const branch = (...args: string[]): Promise<string[]> => {
   );
 };
 
-const checkout = async (branch: string, ...args: string[]): Promise<void> => {
-  const output = await execute(`git checkout${_parseArgs(args)} ${branch}`);
-  print.message(output);
-};
+const checkout = (branch: string, ...args: string[]): Promise<string> =>
+  execute(`git checkout${_parseArgs(args)} ${branch}`);
 
 const fetch = (): Promise<string> => execute("git fetch");
 
 const add = (path: string): Promise<string> => execute(`git add ${path}`);
 
 const commit = (message: string): Promise<string> =>
-  execute(`git commit -m`, `${message}`);
+  execute(`git commit -m`, [`${message}`]);
 
 const currentBranch = (): Promise<string> =>
   execute(`git branch`).then(output => {
