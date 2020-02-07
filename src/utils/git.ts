@@ -6,7 +6,7 @@ const branch = (args: string[] = [], silent: boolean = true): Promise<string> =>
   execute(`git branch ${_parseArgs(args)}`, undefined, silent);
 
 const checkout = (branch: string, ...args: string[]): Promise<string> =>
-  execute(`git checkout ${_parseArgs(args)} ${branch}`);
+  execute(`git checkout ${_parseArgs(args)}`, [branch]);
 
 const fetch = (): Promise<string> => execute("git fetch");
 
