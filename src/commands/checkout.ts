@@ -9,7 +9,10 @@ const checkout = async (options: CheckoutOptions): Promise<void> => {
     print.message("Fetching branches...");
     await git.fetch();
   }
-  const branches = await git.branch(options.all ? "-a" : "");
+  const branches = (await git.branch(options.all ? "-a" : ""))
+    .split("\n")
+    .map(b => b.slice(2))
+    .filter(Boolean);
 
   const selectedOption = await prompt.list(
     "Create a new branch or select one from the list:",

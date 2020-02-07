@@ -5,7 +5,16 @@ import print from "../utils/print";
 const commit = async (options: CommitOptions): Promise<void> => {
   if (options.random) {
   } else {
-    const suffix = options.branch ? ` [${await git.currentBranch()}]` : "";
+    let suffix = "";
+
+    if (options.branch) {
+      const reg = new RegExp(/^[*]\s/);
+      const current = (await git.branch())
+        .split("\n")
+        .find(branch => reg.test(branch));
+
+      suffix = current ? current.replace(reg, "") : "";
+    }
     const message = await prompt.input("Enter commit message:", suffix);
 
     await git.add(".");

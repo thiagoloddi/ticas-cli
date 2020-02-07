@@ -1,23 +1,12 @@
 import { execute } from "./child_process";
-import print from "./print";
 
-const _parseArgs = (args: string[]): string => {
-  args = args.filter(Boolean);
-  return args.length ? ` ${args.join(" ")}` : "";
-};
-const branch = (...args: string[]): Promise<string[]> => {
-  const command = "git branch";
-  const parsed = _parseArgs(args);
-  return execute(command + parsed).then(output =>
-    output
-      .split("\n")
-      .map(b => b.slice(2))
-      .filter(Boolean)
-  );
-};
+const _parseArgs = (args: string[]): string => args.filter(Boolean).join(" ");
+
+const branch = (...args: string[]): Promise<string> =>
+  execute(`git branch ${_parseArgs(args)}`);
 
 const checkout = (branch: string, ...args: string[]): Promise<string> =>
-  execute(`git checkout${_parseArgs(args)} ${branch}`);
+  execute(`git checkout ${_parseArgs(args)} ${branch}`);
 
 const fetch = (): Promise<string> => execute("git fetch");
 
@@ -26,11 +15,4 @@ const add = (path: string): Promise<string> => execute(`git add ${path}`);
 const commit = (message: string): Promise<string> =>
   execute(`git commit -m`, [`${message}`]);
 
-const currentBranch = (): Promise<string> =>
-  execute(`git branch`).then(output => {
-    const reg = new RegExp(/^[*]\s/);
-    const current = output.split("\n").find(branch => reg.test(branch));
-    return current ? current.replace(reg, "") : "";
-  });
-
-export default { branch, checkout, fetch, add, commit, currentBranch };
+export default { branch, checkout, fetch, add, commit };

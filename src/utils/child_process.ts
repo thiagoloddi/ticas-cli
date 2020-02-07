@@ -7,7 +7,7 @@ export const execute = (
   silent: boolean = false
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const args = command.split(" ");
+    const args = command.trim().split(" ");
     const cp = spawn(args[0], args.slice(1).concat(extras));
 
     let output = "";
