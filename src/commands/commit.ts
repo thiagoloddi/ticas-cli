@@ -1,7 +1,13 @@
-import print from "../utils/print";
+import prompt from "../utils/prompt";
+import git from "../utils/git";
 
-const commit = (options: CommitOptions): void => {
-  print.debug("execute commit");
+const commit = async (options: CommitOptions): Promise<void> => {
+  if (options.random) {
+  } else {
+    const message = await prompt.input("Enter commit message:");
+    await git.add(".");
+    await git.commit(message);
+  }
 };
 
 export default commit;
