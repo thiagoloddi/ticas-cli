@@ -26,13 +26,13 @@ const commit = async (options: CommitOptions): Promise<void> => {
     let choice = 0;
 
     while (choice !== 1) {
-      print.message("Generating random commit message...");
+      print.message("\nGenerating random commit message...");
       commitMessage = await axios
         .get("http://whatthecommit.com/index.txt")
         .then(res => res.data);
 
       choice = await prompt.list(
-        `You commit message will be: ${messagePreffix} ${commitMessage}`,
+        `Your commit message will be: ${messagePreffix} ${commitMessage}`,
         choices
       );
     }

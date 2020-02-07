@@ -6,7 +6,7 @@ const error = (message: string): void => {
 };
 
 const message = (message: string): void => {
-  console.log(message);
+  console.log(` ${message}`);
   console.log("");
 };
 
