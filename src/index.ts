@@ -25,7 +25,7 @@ export const start = function(version: string): void {
 
   program
     .command("commit")
-    .alias("c")
+    .alias("cm")
     .description("adds all files to tree and commit the changes")
     .option("-b, --branch", "adds current branch name to  message commit")
     .option("-r, --random", "adds a random commit message (with confirmation)")
@@ -36,6 +36,8 @@ export const start = function(version: string): void {
     .action(({ branch, random, randomForce }) =>
       commit({ branch, random, randomForce })
     );
+
+  program.command("push").alias("ps");
 
   program.command("*", "", { noHelp: true }).action((_, args) => {
     if (args[0]) {

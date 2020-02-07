@@ -14,7 +14,8 @@
     "build:watch": "gulp watch"
   },
   "bin": {
-    "ticas": "./bin/index.js"
+    "ticas": "./bin/index.js",
+    "tc": "./bin/index.js"
   },
   "files": [
     "lib/**/*"
