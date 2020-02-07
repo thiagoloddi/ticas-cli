@@ -3,6 +3,7 @@ import program from "commander";
 import checkout from "./commands/checkout";
 import commit from "./commands/commit";
 import print from "./utils/print";
+import "source-map-support/register";
 
 export const start = function(version: string): void {
   program
@@ -20,7 +21,7 @@ export const start = function(version: string): void {
       "show all local and remote branches (only local by default)"
     )
     .option("-f, --fetch", "run 'git fetch' before showing the list")
-    .action(cmd => checkout({ all: cmd.all, fetch: cmd.fetch }));
+    .action(({ all, fetch }) => checkout({ all, fetch }));
 
   program
     .command("commit")
@@ -28,8 +29,13 @@ export const start = function(version: string): void {
     .description("adds all files to tree and commit the changes")
     .option("-b, --branch", "adds current branch name to  message commit")
     .option("-r, --random", "adds a random commit message (with confirmation)")
-    .option("-R, --random", "adds a random commit message (no confirmation)")
-    .action(cmd => commit());
+    .option(
+      "-R, --random-force",
+      "adds a random commit message (no confirmation)"
+    )
+    .action(({ branch, random, randomForce }) =>
+      commit({ branch, random, randomForce })
+    );
 
   program.command("*", "", { noHelp: true }).action((_, args) => {
     if (args[0]) {

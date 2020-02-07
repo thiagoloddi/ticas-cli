@@ -27,7 +27,6 @@ const checkout = async (options: CheckoutOptions): Promise<void> => {
   } else {
     branchName = branches[selectedOption];
   }
-  console.log("branchName", branchName);
 
   git.checkout(branchName, branches.includes(branchName) ? "" : "-b");
 };
