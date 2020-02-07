@@ -12,6 +12,8 @@ const message = (message: string): void => {
 
 const debug = (message: string): void => {
   const timeStamp = strftime("%T.%L", new Date());
+  console.log("STACK", new Error().stack);
+  console.log("LINE:", new Error().stack?.split("\n")[2]);
   const filePath = new Error().stack
     ?.split("\n")[2]
     .split("(")[1]

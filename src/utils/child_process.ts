@@ -5,7 +5,7 @@ export const execute = (
   command: string,
   ...extra: string[]
 ): Promise<string> => {
-  print.debug("EXECUTING1: " + command);
+  print.debug("EXECUTING1: " + command + extra.join(" "));
   return new Promise((resolve, reject) => {
     const args = command.split(" ");
     const cp = spawn(args[0], args.slice(1).concat(extra));
