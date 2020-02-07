@@ -18,4 +18,7 @@ const commit = (message: string): Promise<string> =>
 const push = (branch: string): Promise<string> =>
   execute(`git push origin ${branch}`);
 
-export default { branch, checkout, fetch, add, commit, push };
+const status = (silent?: boolean): Promise<string> =>
+  execute(`git status`, undefined, silent);
+
+export default { branch, checkout, fetch, add, commit, push, status };
