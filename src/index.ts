@@ -4,6 +4,7 @@ import checkout from "./commands/checkout";
 import commit from "./commands/commit";
 import print from "./utils/print";
 import "source-map-support/register";
+import push from "./commands/push";
 
 export const start = function(version: string): void {
   program
@@ -37,7 +38,10 @@ export const start = function(version: string): void {
       commit({ branch, random, randomForce })
     );
 
-  program.command("push").alias("ps");
+  program
+    .command("push")
+    .alias("ps")
+    .action(() => push());
 
   program.command("*", "", { noHelp: true }).action((_, args) => {
     if (args[0]) {

@@ -10,6 +10,8 @@ export const execute = (
     const args = command.trim().split(" ");
     const cp = spawn(args[0], args.slice(1).concat(extras));
 
+    print.debug(`Executing: ${(cp as any).spawnargs.join(" ")}`);
+
     let output = "";
 
     cp.stdout.on("data", data => {
