@@ -12,18 +12,10 @@ const message = (message: string): void => {
 
 const debug = (message: string): void => {
   const timeStamp = strftime("%T.%L", new Date());
-  console.log("STACK", new Error().stack);
-  console.log("LINE:", new Error().stack?.split("\n")[2]);
   const filePath = new Error().stack
     ?.split("\n")[2]
-    .split("(")[1]
-    .replace(")", "")
-    .split(":")
-    .slice(0, 2)
-    .join(":")
-    .split("/")
-    .slice(-2)
-    .join("/");
+    .replace(/^.+(src\/|lib\/)/, "")
+    .replace(/(:)[0-9]+[)]?$/, "");
 
   console.log(`${timeStamp} ${filePath} - ${message}`);
 };
