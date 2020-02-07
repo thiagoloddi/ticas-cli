@@ -1,11 +1,14 @@
 import { spawn } from "child_process";
 import print from "./print";
 
-export const execute = (command: string): Promise<string> => {
+export const execute = (
+  command: string,
+  ...extra: string[]
+): Promise<string> => {
   print.debug("EXECUTING1: " + command);
   return new Promise((resolve, reject) => {
     const args = command.split(" ");
-    const cp = spawn(args[0], args.slice(1));
+    const cp = spawn(args[0], args.slice(1).concat(extra));
 
     let output = "";
 
