@@ -9,6 +9,7 @@ export const execute = (
   return new Promise((resolve, reject) => {
     const args = command.trim().split(" ");
     const cp = spawn(args[0], args.slice(1).concat(extras));
+    print.debug(`Executing: ${(cp as any).spawnargs.join(" ")}`);
 
     print.debug(`Executing: ${(cp as any).spawnargs.join(" ")}`);
 
